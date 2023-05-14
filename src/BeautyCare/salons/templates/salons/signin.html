@@ -1,0 +1,28 @@
+{% extends "../base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+    {% if messages %}
+    <div class="messages">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="content-section ms-2">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legned class="border-bottom mb-4">Add the services your business offers</legned>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-info">Sign In</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="application/ld+json">
+            {"@context":"https://schema.org/","@type":"WebSite","name":"Beauty Care Anywhere","url":"https://www.beautycareanywhere.com/"}
+        </script>
+        <script src={% static 'js/helpers.js' %}></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Beauty Care Anywhere{% endblock %}</title>
+        <link rel="icon" href={% static 'assets/tab_icon.ico' %}>
+        <link rel="stylesheet" href={% static 'css/helpers.css' %}>
+        {{ form.media }} <!-- needed for JS/GoogleMaps lookup -->
+    </head>
+    <body {% block bodyAttributes %}{% endblock %}>
+        <header>
+            <div class="container-fluid bg-white pt-2 pb-2">
+                <div class="logo-img-div">
+                    <img src={% static 'assets/logo.png' %} class="logo-img" alt="">
+                    {% if "is_authenticated" in request.session %}
+                    <a href="{% url 'salons-register' %}"><span class="btn btn-dark manage-services-button">Manage Services</span></a>
+                    {% else %}
+                    <div style="white-space: nowrap; display: inline-block">
+                    <div class="sign-up-button">business owner?</div>
+                    <a href="{% url 'salons-register' %}"><span class="btn btn-dark sign-up-button">Log In/Sign Up</span></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <hr class="my-0"/>
+
+            <nav class="navbar navbar-expand-lg bg-white my-nav">
+                <button type="button" class="navbar-toggler me-auto" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="my-0 collapse navbar-collapse justify-content-center fs-5" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle px-xl-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Home
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/about">About Us</a></li>
+                                <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                            </ul>
+                            <a class="nav-link dropdown-toggle px-xl-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                For Salons
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/about">Register Your Salon</a></li>
+                                <li><a class="dropdown-item" href="/contact">Manage Your Salon Profile</a></li>
+                                <li><a class="dropdown-item" href="/contact">Manage Your Appointments</a></li>
+                                <li><a class="dropdown-item" href="/contact">Payment and Billing</a></li>
+                            </ul>
+                            <a class="nav-link dropdown-toggle px-xl-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                For Customers
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/about">Find a Salon</a></li>
+                                <li><a class="dropdown-item" href="/contact">Book an Appointment</a></li>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+
+    </body>
+</html>
